@@ -1,21 +1,71 @@
 import './App.css';
-import React from 'react'
-import Button from '@material-ui/core/Button';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
-import { Container } from '@material-ui/core';
+import Signup from './components/SIgnup';
+import Home from './components/Home';
+import Login from './components/Login';
+import { Container, Button } from '@material-ui/core';
+import { Route, Switch } from 'react-router-dom'
 
 function App() {
-  
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem('token') ? true : false
+  );
+  const [ userInfo, setUserInfo] = useState(null);
+  const handleLogOut = async () => {
+    try{
+      const response = await fetch('http://localhost:8000/token/logout', {
+        method: 'POST', 
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+      });
+      if (response.status === 204) {
+        alert('You have been logged out!');
+        localStorage.removeItem('token');
+        setLoggedIn(false);
+        setUserInfo(null);
+      } else {
+        alert('Something wet wrong! Please try again');
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+  const handleSetLogIn = (authToken) => {
+    setLoggedIn(true);
+    localStorage.setItem('token', authToken);
+    getUserInfo();
+  };
+  const getUserInfo = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/users/me/', {
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+      });
+      const data = await response.json()
+      console.log(data)
+      setUserInfo(data)
+    } catch (error) {
+      console.log(error)
+    }
+  };
+  useEffect(() => {
+    if (loggedIn){
+      getUserInfo();
+    }
+  },[]);
   return (
     <>
-      <Navigation/>
+      <Navigation handleSetLogIn={handleSetLogIn} loggedIn={loggedIn} handleLogOut={handleLogOut} userInfo={userInfo}/>
       <Container component="main" maxWidth="lg">
-        <div >
-          Hello World
-          <Button variant="contained" color="primary">
-            Test Button
-          </Button>
-        </div>
+        <Switch>
+          <Route path='/' exact render={() => <Home/>}/>
+          <Route path='/signup' render={() => <Signup/>}/>
+          <Route path='/login' render={() => <Login handleSetLogIn={handleSetLogIn} />}/>
+        </Switch>
       </Container>
       </>
   );
