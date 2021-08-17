@@ -4,18 +4,18 @@ import { useHistory } from 'react-router';
 import { TextField, Typography, IconButton, InputAdornment, Button } from '@material-ui/core';
 import { VisibilityOff } from '@material-ui/icons'
 
-const Login = ( { handleSetLogIn, handleLogOut }) => {
+const Login = ({ handleSetLogIn, handleLogOut }) => {
     const initialFormData = {
         email: '',
-        password:'',
+        password: '',
     };
     const history = useHistory();
     const [formData, setFormData] = useState(initialFormData);
-    const [ showPassword, setShowPassword] = useState()
+    const [showPassword, setShowPassword] = useState()
 
     const _handleChange = (e) => {
         setFormData((prevState) => {
-            return { ...prevState, [e.target.id]: e.target.value}
+            return { ...prevState, [e.target.id]: e.target.value }
         });
     }
 
@@ -29,18 +29,18 @@ const Login = ( { handleSetLogIn, handleLogOut }) => {
                     'Content-Type': 'application/json',
                 },
             });
-            if (res.status === 200){
+            if (res.status === 200) {
                 const token = await res.json();
                 console.log(token);
                 handleSetLogIn(token.auth_token);
                 history.push('/')
-                } else {
-                    alert('Invalid credentials');
-                }
+            } else {
+                alert('Invalid credentials');
+            }
         } catch (error) {
             console.log(error)
         }
-    }    
+    }
 
     const _handleTogglePassword = () => setShowPassword(showPassword => !showPassword);
 
@@ -50,33 +50,33 @@ const Login = ( { handleSetLogIn, handleLogOut }) => {
                 Log In
             </Typography>
             <form onSubmit={_handleLogin}>
-                <TextField 
-                        id='email'
-                        label='Email' 
-                        variant='outlined' 
-                        helperText='Enter your Email' 
-                        required 
-                        onChange={_handleChange}
-                        />
-                    <TextField 
-                        id='password'
-                        label='Password'
-                        aria-label='Password' 
-                        variant='outlined' 
-                        helperText='Enter your Password' 
-                        required 
-                        onChange={_handleChange}
-                        endAdornment={
-                                <IconButton
-                                    aria-label='toggle show password'
-                                    onClick={_handleTogglePassword}
-                                >
-                                    <VisibilityOff />
-                                </IconButton>
-                            
-                        }
-                        />
-                     <Button type='submit'>Log In</Button>
+                <TextField
+                    id='email'
+                    label='Email'
+                    variant='outlined'
+                    helperText='Enter your Email'
+                    required
+                    onChange={_handleChange}
+                />
+                <TextField
+                    id='password'
+                    label='Password'
+                    aria-label='Password'
+                    variant='outlined'
+                    helperText='Enter your Password'
+                    required
+                    onChange={_handleChange}
+                    endAdornment={
+                        <IconButton
+                            aria-label='toggle show password'
+                            onClick={_handleTogglePassword}
+                        >
+                            <VisibilityOff />
+                        </IconButton>
+
+                    }
+                />
+                <Button type='submit'>Log In</Button>
 
             </form>
         </div>

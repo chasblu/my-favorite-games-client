@@ -1,11 +1,20 @@
 import React from 'react';
+import AddGameButton from '../AddGameButton'
+import { Container, Typography, } from '@material-ui/core'
 
-const Home = () => {
+const Home = ({ userInfo, loggedIn }) => {
 
     return (
-        <div>
-            This is the Home Page
-        </div>
+        <Container>
+            {userInfo && (
+                <>
+                    <Typography variant='h1'>
+                        Welcome, {userInfo.username}
+                    </Typography>
+                    <AddGameButton />
+                </>
+            )}
+        </Container>
     );
 };
 

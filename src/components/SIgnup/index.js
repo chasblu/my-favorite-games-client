@@ -16,11 +16,11 @@ const Signup = () => {
     const [formData, setFormData] = useState(initialFormData);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
-    const [ showPassword, setShowPassword] = useState()
+    const [showPassword, setShowPassword] = useState()
 
-    const handleChange = (e)=> {
+    const handleChange = (e) => {
         setFormData((prevState) => {
-            return { ...prevState, [e.target.id]: e.target.value}
+            return { ...prevState, [e.target.id]: e.target.value }
         });
     };
     const handlePasswordMatch = (e) => {
@@ -43,7 +43,7 @@ const Signup = () => {
             if (response.status === 201) {
                 setSuccess(true);
                 setTimeout(() => {
-                    history.push('/login');   
+                    history.push('/login');
                 }, 3000);
             } else {
                 const data = await response.json();
@@ -56,38 +56,38 @@ const Signup = () => {
         }
     };
     const _handleTogglePassword = () => setShowPassword(showPassword => !showPassword);
-    
+
     return (
         <div>
             <Typography variant='h2'>
                 Create an Account
             </Typography>
             <form onSubmit={_handleSignup}>
-                    
-                <TextField 
+
+                <TextField
                     id='username'
-                    label='Username' 
-                    variant='outlined' 
-                    helperText='Create a Username' 
-                    required 
+                    label='Username'
+                    variant='outlined'
+                    helperText='Create a Username'
+                    required
                     unique
                     onChange={handleChange}
-                    />
-                <TextField 
+                />
+                <TextField
                     id='email'
-                    label='Email' 
-                    variant='outlined' 
-                    helperText='We will never share your email' 
-                    required 
+                    label='Email'
+                    variant='outlined'
+                    helperText='We will never share your email'
+                    required
                     onChange={handleChange}
-                    />
-                <TextField 
+                />
+                <TextField
                     id='password'
                     label='Password'
-                    aria-label='Password' 
-                    variant='outlined' 
-                    helperText='Password must be at least 8 characters and include letters and numbers' 
-                    required 
+                    aria-label='Password'
+                    variant='outlined'
+                    helperText='Password must be at least 8 characters and include letters and numbers'
+                    required
                     onChange={handleChange}
                     endAdornment={
                         <InputAdornment position='end'>
@@ -96,18 +96,18 @@ const Signup = () => {
                                 onClick={_handleTogglePassword}
                                 color='secondary'
                             >
-                                 <Visibility />
+                                <Visibility />
                             </IconButton>
                         </InputAdornment>
                     }
-                    />
-                    
-                <TextField 
+                />
+
+                <TextField
                     id='re_password'
-                    label='Confirm Password' 
-                    variant='outlined' 
-                    required 
-                    onChange={handleChange} 
+                    label='Confirm Password'
+                    variant='outlined'
+                    required
+                    onChange={handleChange}
                     onBlur={handlePasswordMatch}
                     helperText='Passwords must match exactly'
                 />
@@ -116,7 +116,7 @@ const Signup = () => {
                     <Alert severity="error">Passwords must match!
                         <AlertTitle>Error</AlertTitle>
                     </Alert>
-                    )}
+                )}
                 {success && (
                     <Alert severity='success'>
                         <AlertTitle>Success</AlertTitle>
@@ -124,7 +124,7 @@ const Signup = () => {
                         are not automatically redirected, please click{' '}
                         {<Link to='/login'>here</Link>}.
                     </Alert>
-                )}    
+                )}
             </form>
         </div>
     );

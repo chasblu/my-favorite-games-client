@@ -8,9 +8,13 @@ const Navigation = ({ loggedIn, handleLogOut, userInfo }) => {
         <AppBar position="sticky">
                 <Toolbar>
                     
-                    <Link to='/'>Home</Link>
+                    <Link to='/' style={{ textDecoration: 'none'}}>
+                        <Button color='secondary'>Home</Button>
+                    </Link>
                     
-                    <Link to='/favorites'>Favorites</Link>
+                    <Link to='/games' style={{ textDecoration: 'none'}}>
+                        <Button color='secondary'>Games</Button>
+                    </Link>
 
                     {userInfo && (
                         <Typography variant='h6'>
@@ -19,7 +23,7 @@ const Navigation = ({ loggedIn, handleLogOut, userInfo }) => {
                     )}
                     
                     {loggedIn ? (
-                            <Link to='/'>
+                            <Link to='/' style={{ textDecoration: 'none'}}>
                                 <Button color="secondary" onClick={handleLogOut}>
                                     Log Out
                                 </Button>
@@ -27,10 +31,10 @@ const Navigation = ({ loggedIn, handleLogOut, userInfo }) => {
                     ) : (
                     
                         <>
-                        <Link to='/signup'>
+                        <Link to='/signup' style={{ textDecoration: 'none'}}>
                             <Button color="secondary">Sign Up</Button>
                         </Link>
-                        <Link to='/login'>
+                        <Link to='/login' style={{ textDecoration: 'none'}}>
                             <Button color="secondary">Log In</Button>
                         </Link> 
                         </>
