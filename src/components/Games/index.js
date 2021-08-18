@@ -9,7 +9,7 @@ const Games = ({ loggedIn }) => {
 
     const getGamesIndex = async () => {
         try {
-            const response = await fetch('http://localhost:8000/games/');
+            const response = await fetch('https://myfavoritegamesapi.herokuapp.com/games/');
             const data = await response.json();
             console.log(data)
             setGames(data);

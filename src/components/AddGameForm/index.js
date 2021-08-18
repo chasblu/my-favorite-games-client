@@ -24,7 +24,7 @@ const AddGameForm = ({ loggedIn }) => {
 
     const _addGame = async (e) => {
         try {
-            const res = await fetch('http://localhost:8000/games/', {
+            const res = await fetch('https://myfavoritegamesapi.herokuapp.com/games/', {
                 method: 'POST',
                 body: JSON.stringify(gameData),
                 headers: {

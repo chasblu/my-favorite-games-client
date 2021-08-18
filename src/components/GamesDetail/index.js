@@ -13,7 +13,7 @@ const GameDetail = ({ userInfo, loggedIn }) => {
 
     const getGameDetail = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/games/${id}`)
+            const res = await fetch(`https://myfavoritegamesapi.herokuapp.com/games/${id}`)
             console.log(res)
             const data = await res.json();
             console.log(data)
@@ -32,7 +32,7 @@ const GameDetail = ({ userInfo, loggedIn }) => {
     const _handleDeleteGame = async () => {
         if (window.confirm('Are you sure you want to delete this game?')) {
             try {
-                const res = await fetch(`http://localhost:8000/games/${id}`, {
+                const res = await fetch(`https://myfavoritegamesapi.herokuapp.com/games/${id}`, {
                     method: 'DELETE',
                     headers: {
                         Authorization: `Token ${localStorage.getItem('token')}`

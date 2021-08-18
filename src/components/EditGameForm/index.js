@@ -20,7 +20,7 @@ const EditGameForm = () => {
 
     const getGame = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/games/${id}`)
+            const res = await fetch(`https://myfavoritegamesapi.herokuapp.com/games/${id}`)
             const data = await res.json()
             setGameData({
                 title: data.title,
@@ -50,7 +50,7 @@ const EditGameForm = () => {
     const _updateGame = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch(`http://localhost:8000/games/${id}`, {
+            const res = await fetch(`https://myfavoritegamesapi.herokuapp.com/games/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify(gameData),
                 headers: {

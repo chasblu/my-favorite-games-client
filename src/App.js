@@ -21,7 +21,7 @@ function App() {
 
   const handleLogOut = async () => {
     try {
-      const response = await fetch('http://localhost:8000/token/logout', {
+      const response = await fetch('https://myfavoritegamesapi.herokuapp.com/token/logout', {
         method: 'POST',
         headers: {
           Authorization: `Token ${localStorage.getItem('token')}`,
@@ -48,7 +48,7 @@ function App() {
 
   const getUserInfo = async () => {
     try {
-      const response = await fetch('http://localhost:8000/users/me/', {
+      const response = await fetch('https://myfavoritegamesapi.herokuapp.com/users/me/', {
         headers: {
           Authorization: `Token ${localStorage.getItem('token')}`,
         },

@@ -33,7 +33,7 @@ const Signup = () => {
     const _handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:8000/users/', {
+            const response = await fetch('https://myfavoritegamesapi.herokuapp.com/users/', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {

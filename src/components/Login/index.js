@@ -22,7 +22,7 @@ const Login = ({ handleSetLogIn, handleLogOut }) => {
     const _handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:8000/token/login', {
+            const res = await fetch('https://myfavoritegamesapi.herokuapp.com/token/login', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
