@@ -15,8 +15,13 @@ My Favorite Games is the front-end portion of the my favorite games full stack a
 - Material UI
 - Netlify
 
+### Stretch Goals
+- As a user I can add reviews to games
+- As a user I can view only my favorite games that I added
+ 
+
 ### Installation Requirements:
-- Clone repo from github 
+- Fork and Clone repo from github 
 - Site uses yarn and React Router
 
 ### Sample Login Info:
@@ -34,6 +39,7 @@ Learning Material UI presented its challenges but was overall a very fun experie
 ### Ongoing Issues 
 A few of redirects stopped working after deployment 
 Overall styling needs work 
+cannot add reviews to 
 
 
 
