@@ -1,12 +1,12 @@
 import React from 'react';
 import AddGameButton from '../AddGameButton'
-import { Container, Typography, } from '@material-ui/core'
+import { Card, Container, Typography, CardContent } from '@material-ui/core'
 
 const Home = ({ userInfo, loggedIn }) => {
 
     return (
         <Container>
-             {loggedIn ? (
+             {userInfo ? (
                 <>
                     <Typography variant='h1'>
                         Welcome, {userInfo.username}
@@ -15,7 +15,12 @@ const Home = ({ userInfo, loggedIn }) => {
                 </>
             ) : 
             (
-                <Typography>Welcome Please Log In</Typography>
+                <Card>
+                    <CardContent >
+                        <Typography variant='h1'>Welcome Please Login</Typography>
+                    </CardContent>
+
+                </Card>
             )}
         </Container>
     );
