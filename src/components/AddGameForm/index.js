@@ -1,9 +1,9 @@
 import React from 'react';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Typography, TextField, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
-const AddGameForm = ({ getGameIndex }) => {
+const AddGameForm = ({ loggedIn }) => {
     const initialGameData = {
         title: '',
         genre: '',
@@ -49,6 +49,7 @@ const AddGameForm = ({ getGameIndex }) => {
             <TextField
                 id='title'
                 label='Title'
+                autoFocus
                 variant='outlined'
                 helperText='Add a Title'
                 required

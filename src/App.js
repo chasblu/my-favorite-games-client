@@ -6,9 +6,10 @@ import Home from './components/Home';
 import Signup from './components/SIgnup';
 import Login from './components/Login';
 import Games from './components/Games'
-import { Container, Button } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom'
 import AddGameForm from './components/AddGameForm';
+import GameDetail from './components/GamesDetail';
 
 function App() {
 
@@ -16,7 +17,6 @@ function App() {
     localStorage.getItem('token') ? true : false
   );
   const [userInfo, setUserInfo] = useState(null);
-  const [games, setGames] = useState([]);
 
   const handleLogOut = async () => {
     try {
@@ -60,17 +60,6 @@ function App() {
     }
   };
 
-  const getGamesIndex = async () => {
-    try {
-        const response = await fetch('http://localhost:8000/games');
-        const data = await response.json();
-        console.log(data)
-        setGames(data);
-    } catch (error) {
-        console.log(error);
-    }
-};
-
   useEffect(() => {
     if (loggedIn) {
       getUserInfo();
@@ -83,10 +72,11 @@ function App() {
       <Container component="main" maxWidth="lg">
         <Switch>
           <Route path='/' exact render={() => <Home loggedIn={loggedIn} userInfo={userInfo} />} />
-          <Route path='/games' exact render={() => <Games loggedIn={loggedIn} />}/>
           <Route path='/signup' render={() => <Signup />} />
           <Route path='/login' render={() => <Login handleSetLogIn={handleSetLogIn} />} />
-          <Route path='/games/new' render={() => <AddGameForm getGamesIndex={getGamesIndex}/>}/>
+          <Route path='/games/new' render={() => <AddGameForm loggedIn={loggedIn} />}/>
+          <Route path='/games' exact render={() => <Games loggedIn={loggedIn} />}/>
+          <Route path='/games/:id' render={() => <GameDetail userInfo={userInfo} loggedIn={loggedIn}/>}/>
         </Switch>
       </Container>
     </>
