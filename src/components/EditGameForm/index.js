@@ -59,6 +59,7 @@ const EditGameForm = () => {
                 },
             });
             if (res.status === 201) {
+                getGame();
                 history.goBack();
             }
         } catch (error) {
@@ -116,12 +117,11 @@ const EditGameForm = () => {
             />
             <TextField
                 id='preview_url'
-                type='url'
+                type='text'
                 label='Image'
                 value={gameData.preview_url}
                 variant='outlined'
                 helperText='Add a link for an image'
-                required
                 onChange={_handleChange}
             />
             <Button type='submit'>Edit Game</Button>

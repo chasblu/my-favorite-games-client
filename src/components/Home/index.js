@@ -6,13 +6,16 @@ const Home = ({ userInfo, loggedIn }) => {
 
     return (
         <Container>
-            {userInfo && (
+             {loggedIn ? (
                 <>
                     <Typography variant='h1'>
                         Welcome, {userInfo.username}
                     </Typography>
                     <AddGameButton />
                 </>
+            ) : 
+            (
+                <Typography>Welcome Please Log In</Typography>
             )}
         </Container>
     );
