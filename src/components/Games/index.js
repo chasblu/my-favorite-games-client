@@ -43,12 +43,6 @@ const Games = ({ loggedIn }) => {
                                 <Typography>Genre:{game.genre}</Typography>
                                 <Typography>Release date:{game.release_date}</Typography>
                                 <Typography>Rating: {game.rating}</Typography>
-                                <IconButton>
-                                    <EditIcon />
-                                </IconButton>
-                                <IconButton>
-                                    <DeleteIcon />
-                                </IconButton>
                                 <Typography>Number of Reviews: {game.reviews.length}</Typography>
                             </CardContent>
                         </Link>

@@ -10,6 +10,7 @@ import { Container } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom'
 import AddGameForm from './components/AddGameForm';
 import GameDetail from './components/GamesDetail';
+import EditGameForm from './components/EditGameForm';
 
 function App() {
 
@@ -76,6 +77,7 @@ function App() {
           <Route path='/login' render={() => <Login handleSetLogIn={handleSetLogIn} />} />
           <Route path='/games/new' render={() => <AddGameForm loggedIn={loggedIn} />}/>
           <Route path='/games' exact render={() => <Games loggedIn={loggedIn} />}/>
+          <Route path='/games/:id/edit' render={() => <EditGameForm />}/>
           <Route path='/games/:id' render={() => <GameDetail userInfo={userInfo} loggedIn={loggedIn}/>}/>
         </Switch>
       </Container>

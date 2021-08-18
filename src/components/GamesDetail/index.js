@@ -1,14 +1,15 @@
 import { Card, Container, CardContent, Typography, CardHeader,CardMedia, IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory, Link } from 'react-router-dom'
+
 
 const GameDetail = ({ userInfo, loggedIn }) => {
 
     const [game, setGame] = useState(null)
     const { id } = useParams();
+    const history = useHistory();
 
     const getGameDetail = async () => {
         try {
@@ -28,6 +29,27 @@ const GameDetail = ({ userInfo, loggedIn }) => {
         getGameDetail();
     }, []);
 
+    const _handleDeleteGame = async () => {
+        if (window.confirm('Are you sure you want to delete this game?')) {
+            try {
+                const res = await fetch(`http://localhost:8000/games/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: `Token ${localStorage.getItem('token')}`
+                    }
+            })
+                
+                if (res.status === 204 ) {
+                    getGameDetail()
+                    history.push('/games')
+                } else {
+                    alert('Something went wrong, one moment please')
+                }
+            } catch (error) {
+                console.log(error)
+            }}
+        }
+
     if (!game) {
         return null;
     }
@@ -46,9 +68,11 @@ const GameDetail = ({ userInfo, loggedIn }) => {
                         <Typography>Release date:{game.release_date}</Typography>
                         <Typography>Rating: {game.rating}</Typography>
                         <IconButton>
-                           <EditIcon />
+                           <Link to={`/games/${game.id}/edit`}>
+                               <EditIcon />
+                           </Link>
                         </IconButton>
-                         <IconButton>
+                         <IconButton onClick={_handleDeleteGame}>
                             <DeleteIcon />
                         </IconButton>
                         {game.reviews && game.reviews.map((review) => {
